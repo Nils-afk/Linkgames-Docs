@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Widgets</title>
+    <style>
+        .info-box {
+            background-color: #ffcccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        #loadButton, #themeButton {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        #themeButton {
+            background-color: #008CBA;
+        }
+
+        #language {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-box">
+        <p>Please note that you need to join our Discord server to use these widgets: <a href="https://discord.gg/VRYSb3sEN3" target="_blank">Join Discord Server</a></p>
+    </div>
+
+    <h1>Discord Widgets</h1>
+    <form id="discordForm">
+        <label for="discordID">Discord User ID:</label><br>
+        <input type="text" id="discordID" name="discordID" style="padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 20px;"><br>
+
+        <label for="language">Select Language:</label><br>
+        <select id="language" name="language" style="padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9; margin-bottom: 20px;" onchange="loadWidgets()">
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="tr">Türkçe</option>
+        </select><br>
+
+        <button id="loadButton" type="button" onclick="loadWidgets()">Load Widgets</button>
+        <button id="themeButton" type="button" onclick="toggleTheme()">Switch to Dark Mode</button>
+    </form>
+
+    <div id="widgets"></div>
+
+    <script>
+        var isDarkMode = false;
+
+        function loadWidgets() {
+            var discordID = document.getElementById('discordID').value;
+            var language = document.getElementById('language').value;
+            var widgetsDiv = document.getElementById('widgets');
+            var theme = isDarkMode ? '&theme=dark' : '';
+            var lang = `&language=${language}`;
+            widgetsDiv.innerHTML = `
+                <div>
+                    <iframe src="https://linkgames.de/api/v3/widget/${discordID}?type=spotify_large${theme}${lang}" width="600" height="150" allowtransparency="true" frameborder="0"></iframe>
+                </div>
+                <div>
+                    <iframe src="https://linkgames.de/api/v3/widget/${discordID}?type=spotify_small${theme}${lang}" width="150" height="150" allowtransparency="true" frameborder="0"></iframe>
+                </div>
+                <div>
+                    <iframe src="https://linkgames.de/api/v3/widget/${discordID}?type=spotify_mini${theme}${lang}" width="300" height="60" allowtransparency="true" frameborder="0"></iframe>
+                </div>
+                <div>
+                    <iframe src="https://linkgames.de/api/v3/widget/${discordID}?type=vsc${theme}${lang}" width="600" height="150" allowtransparency="true" frameborder="0"></iframe>
+                </div>
+                <div>
+                    <iframe src="https://linkgames.de/api/v3/widget/${discordID}?type=status${theme}${lang}" width="300" height="100" allowtransparency="true" frameborder="0"></iframe>
+                </div>
+            `;
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            var themeButton = document.getElementById('themeButton');
+            themeButton.textContent = isDarkMode ? 'Switch to White Mode' : 'Switch to Dark Mode';
+            loadWidgets();
+        }
+    </script>
+</body>
+</html>

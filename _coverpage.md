@@ -7,7 +7,8 @@
 - Easy to use.
 
 [Discord](https://discord.gg/gZZaxQ79PJ)
-[Get Started](#headline)
+[Get Started](#get-started)
+[Live Preview](https://linkgames.de/test.html)
 
 <!-- background color -->
 ![color](#f0f0f0)
